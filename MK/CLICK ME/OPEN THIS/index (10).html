@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MK Unblocked Games</title>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #e8820a;
+      --accent-dim: #a05008;
+      --accent-glow: rgba(232,130,10,0.4);
+      --bg: #080503;
+      --surface: rgba(255,255,255,0.06);
+      --surface-solid: #0e0a06;
+      --border: rgba(255,255,255,0.12);
+      --border-hot: rgba(255,255,255,0.28);
+      --text: #fff;
+      --text-muted: rgba(255,255,255,0.55);
+      --text-dim: rgba(255,255,255,0.25);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── HALLOWEEN TITLE ── */
+    .halloween-title {
+      position: absolute;
+      top: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Creepster', cursive;
+      font-size: 3.8rem;
+      color: #ff6a00;
+      text-shadow:
+        0 0 10px #ff4500,
+        0 0 30px #ff4500,
+        0 0 60px rgba(255,69,0,0.6),
+        2px 2px 0 #000,
+        -1px -1px 0 #000;
+      white-space: nowrap;
+      letter-spacing: 4px;
+      animation: flicker 3s infinite alternate;
+      pointer-events: none;
+      z-index: 10000;
+    }
+
+    @keyframes flicker {
+      0%   { opacity: 1;    text-shadow: 0 0 10px #ff4500, 0 0 30px #ff4500, 0 0 60px rgba(255,69,0,0.6), 2px 2px 0 #000; }
+      18%  { opacity: 0.85; text-shadow: 0 0 6px #ff4500, 0 0 18px #ff4500, 2px 2px 0 #000; }
+      22%  { opacity: 1;    text-shadow: 0 0 14px #ff4500, 0 0 40px #ff4500, 0 0 80px rgba(255,69,0,0.5), 2px 2px 0 #000; }
+      60%  { opacity: 0.92; }
+      80%  { opacity: 0.78; text-shadow: 0 0 4px #ff4500, 2px 2px 0 #000; }
+      100% { opacity: 1;    text-shadow: 0 0 10px #ff4500, 0 0 30px #ff4500, 0 0 60px rgba(255,69,0,0.5), 2px 2px 0 #000; }
+    }
+
+    /* ── BG IMAGE ── */
+    .bg-image {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      background: url('HalloweenHome.png') center center / cover no-repeat;
+      opacity: 0.32;
+      display: none;
+      pointer-events: none;
+    }
+    .bg-image.show { display: block; }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* ── MOON ── */
+    .moon {
+      position: fixed;
+      top: 28px;
+      left: 38px;
+      z-index: 15;
+      pointer-events: none;
+      animation: moonPulse 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes moonPulse {
+      from { filter: drop-shadow(0 0 14px rgba(255,230,120,0.6)) drop-shadow(0 0 34px rgba(255,200,60,0.3)); }
+      to   { filter: drop-shadow(0 0 28px rgba(255,240,140,0.95)) drop-shadow(0 0 70px rgba(255,210,80,0.6)); }
+    }
+
+    /* ── WITCH ── */
+    .witch-fly {
+      position: fixed;
+      top: 55px;
+      left: 0;
+      z-index: 14;
+      pointer-events: none;
+      opacity: 0;
+      animation: witchFly 16s linear infinite;
+      animation-delay: 3s;
+    }
+
+    @keyframes witchFly {
+      0%   { transform: translateX(110vw) translateY(0px);   opacity: 0; }
+      4%   { opacity: 1; }
+      50%  { transform: translateX(38vw)  translateY(-28px); opacity: 1; }
+      96%  { opacity: 1; }
+      100% { transform: translateX(-180px) translateY(12px); opacity: 0; }
+    }
+
+    /* ── PASSWORD SCREEN ── */
+    #password-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: radial-gradient(ellipse at center, #1a0c02 0%, #040200 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lock-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border-hot);
+      padding: 44px 50px;
+      text-align: center;
+      position: relative;
+      animation: lockIn 0.5s cubic-bezier(0.16,1,0.3,1);
+      box-shadow: 0 0 60px rgba(232,130,10,0.15), inset 0 0 40px rgba(0,0,0,0.3);
+      backdrop-filter: blur(12px);
+    }
+
+    .lock-box::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--accent-dim), transparent 40%, var(--accent-dim));
+      z-index: -1;
+      opacity: 0.3;
+    }
+
+    @keyframes lockIn {
+      from { opacity: 0; transform: translateY(18px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .lock-box h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 6px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .lock-logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 6px;
+      line-height: 1;
+      margin-bottom: 6px;
+      text-shadow: 0 0 30px rgba(255,255,255,0.6);
+    }
+
+    .lock-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.4);
+      margin: 18px auto;
+    }
+
+    .lock-box input {
+      display: block;
+      width: 100%;
+      padding: 12px 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      outline: none;
+      text-align: center;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      margin-bottom: 12px;
+    }
+
+    .lock-box input:focus {
+      border-color: rgba(255,255,255,0.6);
+      box-shadow: 0 0 16px rgba(255,255,255,0.1);
+    }
+
+    .lock-box button {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .lock-box button:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+
+    #error-msg {
+      color: #ff6b6b;
+      margin-top: 12px;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      font-family: 'Space Mono', monospace;
+      min-height: 18px;
+    }
+
+    /* ── UPDATE LOG POPUP ── */
+    #update-log {
+      position: fixed;
+      inset: 0;
+      z-index: 8888;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    #update-log.show { display: flex; }
+
+    .update-box {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid var(--border-hot);
+      padding: 40px 48px 32px;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(232,130,10,0.2);
+      animation: lockIn 0.4s cubic-bezier(0.16,1,0.3,1);
+      backdrop-filter: blur(16px);
+    }
+
+    .update-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .update-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 3px;
+      margin-bottom: 4px;
+    }
+
+    .update-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.3);
+      margin: 14px auto;
+    }
+
+    .update-body {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      color: var(--text-muted);
+      line-height: 2.1;
+      letter-spacing: 1px;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+
+    .update-body li {
+      list-style: none;
+    }
+
+    .update-body li::before {
+      content: '— ';
+      color: var(--accent);
+    }
+
+    .update-ok {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .update-ok:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+
+    /* ── CENTER LAYOUT ── */
+    .center {
+      position: fixed;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .mk-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 6rem;
+      font-weight: 700;
+      letter-spacing: 12px;
+      color: #fff;
+      text-shadow: 0 0 60px rgba(255,255,255,0.9), 0 0 120px rgba(255,255,255,0.4);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .mk-version {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      margin-bottom: 36px;
+    }
+
+    .home-btns {
+      display: flex;
+      gap: 16px;
+      pointer-events: all;
+      margin-bottom: 32px;
+    }
+
+    .home-btn {
+      width: 120px;
+      height: 100px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+      backdrop-filter: blur(8px);
+    }
+
+    .home-btn:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: var(--border-hot);
+      box-shadow: 0 0 24px rgba(255,255,255,0.08);
+    }
+
+    .home-btn svg {
+      width: 32px;
+      height: 32px;
+      fill: #fff;
+      opacity: 0.85;
+    }
+
+    .home-btn-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #fff;
+      text-transform: lowercase;
+    }
+
+    .home-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      pointer-events: all;
+    }
+
+    .home-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .home-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+
+    .home-links a:hover { color: #fff; }
+    .home-links .dot { color: var(--text-dim); font-size: 0.6rem; }
+
+    .home-credit {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+    }
+
+    .home-credit strong { color: var(--text-muted); }
+
+    /* ── GAMES SCREEN ── */
+    #games-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      background: rgba(4,2,1,0.55);
+    }
+
+    #games-screen.open { display: flex; }
+
+    .games-header {
+      text-align: center;
+      padding: 28px 20px 0;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .games-header h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 6px;
+      text-shadow: 0 0 40px rgba(255,255,255,0.8);
+      margin-bottom: 18px;
+    }
+
+    .games-search-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .search-icon-wrap { position: relative; display: inline-block; }
+
+    .search-icon-wrap svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      stroke: rgba(255,255,255,0.5);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      pointer-events: none;
+    }
+
+    .games-search {
+      width: 340px;
+      padding: 10px 18px 10px 36px;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.45);
+      border-radius: 999px;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      outline: none;
+      backdrop-filter: blur(8px);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .games-search::placeholder { color: rgba(255,255,255,0.4); letter-spacing: 2px; }
+    .games-search:focus { border-color: #fff; box-shadow: 0 0 16px rgba(255,255,255,0.12); }
+
+    .games-cat-select {
+      padding: 7px 32px 7px 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(255,255,255,0.5)'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      min-width: 120px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .games-cat-select option { background: #1a0e05; color: #fff; }
+
+    .games-back-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+
+    .games-back-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+      padding: 4px 8px;
+    }
+
+    .games-back-btn:hover { color: #fff; }
+
+    .games-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 32px 32px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.15) transparent;
+      position: relative;
+      z-index: 2;
+    }
+
+    .games-body::-webkit-scrollbar { width: 4px; }
+    .games-body::-webkit-scrollbar-track { background: transparent; }
+    .games-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .game-card {
+      position: relative;
+      height: 130px;
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      transition: border-color 0.2s, transform 0.18s, box-shadow 0.18s;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(6px);
+    }
+
+    .game-card:hover {
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+    }
+
+    .game-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center top;
+      filter: brightness(0.85);
+      border-radius: 14px;
+      z-index: 0;
+    }
+
+    .game-card-emoji {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      opacity: 0.25;
+    }
+
+    .game-card-title {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      text-transform: lowercase;
+      z-index: 2;
+    }
+
+    .game-card-star {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.3);
+      z-index: 3;
+      transition: color 0.2s;
+    }
+
+    .game-card:hover .game-card-star { color: rgba(255,255,255,0.7); }
+
+    /* ── SETTINGS SCREEN ── */
+    #settings-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      flex-direction: column;
+      background: rgba(4,2,1,0.55);
+    }
+
+    #settings-screen.open { display: flex; }
+
+    .settings-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 32px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(12px);
+      position: relative;
+      z-index: 2;
+    }
+
+    .settings-logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 5px;
+    }
+
+    .settings-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .settings-close:hover { color: #fff; }
+
+    .settings-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 36px 48px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .page-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .settings-list { display: flex; flex-direction: column; gap: 2px; }
+
+    .settings-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .settings-row:hover {
+      border-color: var(--border-hot);
+      background: rgba(255,255,255,0.09);
+    }
+
+    .settings-row-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .settings-row-value {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .settings-toggle {
+      width: 36px;
+      height: 20px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .settings-toggle.on { background: rgba(255,255,255,0.45); }
+
+    .settings-toggle::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #fff;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: left 0.2s;
+    }
+
+    .settings-toggle.on::after { left: 19px; }
+
+    /* ── GAME PLAYER ── */
+    #game-player {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 999;
+      display: none;
+      flex-direction: column;
+    }
+
+    #game-player iframe { flex: 1; border: none; }
+
+    #close-game {
+      background: rgba(255,255,255,0.07);
+      border: none;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 10px 20px;
+      cursor: pointer;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-align: left;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    #close-game:hover { color: #fff; background: rgba(255,255,255,0.12); }
+  </style>
+</head>
+<body>
+
+<!-- MOON -->
+<div class="moon">
+  <svg width="92" height="92" viewBox="0 0 92 92" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="46" cy="46" r="40" fill="#f5d97a"/>
+    <circle cx="46" cy="46" r="36" fill="#fce98e"/>
+    <circle cx="34" cy="37" r="5.5" fill="#e8c855" opacity="0.55"/>
+    <circle cx="57" cy="53" r="7.5" fill="#e8c855" opacity="0.45"/>
+    <circle cx="41" cy="58" r="3.8" fill="#e8c855" opacity="0.5"/>
+    <circle cx="61" cy="34" r="4.2" fill="#e8c855" opacity="0.4"/>
+    <circle cx="50" cy="28" r="2.8" fill="#e8c855" opacity="0.35"/>
+  </svg>
+</div>
+
+<!-- WITCH ON BROOM -->
+<div class="witch-fly" onclick="openWitchScare()" style="cursor:pointer;">
+  <img src="Witch.png" style="width:160px;height:auto;" />
+</div>
+
+<!-- WITCH JUMPSCARE SCREEN -->
+<div id="witch-scare-screen" style="
+  position: fixed;
+  inset: 0;
+  z-index: 9001;
+  background: #000;
+  display: none;
+  cursor: none;
+  overflow: hidden;
+">
+  <video id="witch-scare-video" src="Witch.mp4" style="
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:9002;
+  " playsinline></video>
+  <div onclick="closeWitchScare()" style="
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    z-index: 9003;
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.15);
+    cursor: pointer;
+    letter-spacing: 2px;
+    user-select: none;
+  ">ESC</div>
+</div>
+
+<!-- VENT -->
+<div id="vent-btn" onclick="openVent()" style="
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 15;
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s;
+" onmouseenter="this.style.opacity='1';this.style.transform='scale(1.07)'"
+   onmouseleave="this.style.opacity='0.85';this.style.transform='scale(1)'">
+  <img src="Vent.png" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" />
+</div>
+
+<!-- VENT SCREEN -->
+<div id="vent-screen" style="
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: #000;
+  display: none;
+  cursor: none;
+  overflow: hidden;
+">
+  <canvas id="vent-canvas" style="position:absolute;inset:0;"></canvas>
+  <video id="jumpscare-video" src="JUMPSCARE.mp4" style="
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+    z-index:9002;
+  " playsinline></video>
+  <div id="vent-close" onclick="closeVent()" style="
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    z-index: 9001;
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.15);
+    cursor: pointer;
+    letter-spacing: 2px;
+    user-select: none;
+  ">ESC</div>
+</div>
+
+<!-- BG IMAGE (hidden until logged in) -->
+<div class="bg-image" id="bg-image"></div>
+
+<!-- PASSWORD -->
+<div id="password-screen">
+  <div class="halloween-title">Happy Halloween</div>
+  <div class="lock-box">
+    <h2>Access Required</h2>
+    <div class="lock-logo">MK</div>
+    <div class="lock-divider"></div>
+    <input id="password-input" type="password" placeholder="· · · · · · ·">
+    <button onclick="checkPassword()">Enter</button>
+    <div id="error-msg"></div>
+  </div>
+</div>
+
+<!-- UPDATE LOG -->
+<div id="update-log">
+  <div class="update-box">
+    <div class="update-tag">🎃 Update — v1.1</div>
+    <div class="update-title">MAJOR HALLOWEEN UPDATE 🎃</div>
+    <div class="update-divider"></div>
+    <ul class="update-body">
+      <li>Many new games including RL 2D</li>
+      <li>Halloween Shi</li>
+      <li>New UI</li>
+    </ul>
+    <button class="update-ok" onclick="closeUpdateLog()">OK</button>
+  </div>
+</div>
+
+<canvas id="stars"></canvas>
+
+<!-- HOME -->
+<div class="center">
+  <div class="mk-title">MK</div>
+  <div class="mk-version">version 1.1 &nbsp;/&nbsp; halloween build</div>
+  <div class="home-btns">
+    <button class="home-btn" onclick="openGames()">
+      <svg viewBox="0 0 24 24"><path d="M17 4H7C4.24 4 2 6.24 2 9v6c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V9c0-2.76-2.24-5-5-5zm-7 9H8v2H6v-2H4v-2h2V9h2v2h2v2zm4.5 1c-.83 0-1.5-.67-1.5-1.5S13.67 11 14.5 11s1.5.67 1.5 1.5S15.33 14 14.5 14zm3-3c-.83 0-1.5-.67-1.5-1.5S16.67 8 17.5 8s1.5.67 1.5 1.5S18.33 11 17.5 11z"/></svg>
+      <span class="home-btn-label">games</span>
+    </button>
+    <button class="home-btn" onclick="openSettings()">
+      <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+      <span class="home-btn-label">settings</span>
+    </button>
+  </div>
+  <div class="home-footer">
+    <div class="home-links">
+      <a onclick="openGames()">games</a>
+      <span class="dot">•</span>
+      <a onclick="openSettings()">settings</a>
+    </div>
+    <div class="home-credit">— &nbsp; Created By The Goat &nbsp;<strong>MK</strong> &nbsp;—</div>
+  </div>
+</div>
+
+<!-- GAMES SCREEN -->
+<div id="games-screen">
+  <div style="position:absolute;inset:0;background:url('HalloweenHome.png') center/cover no-repeat;opacity:0;z-index:0;pointer-events:none;"></div>
+
+  <div class="games-header">
+    <h1>games</h1>
+    <div class="games-search-wrap">
+      <div class="search-icon-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+        <input class="games-search" id="game-search" type="text" placeholder="search" oninput="filterGames()" autocomplete="off" spellcheck="false">
+      </div>
+      <select class="games-cat-select" id="cat-select" onchange="filterByCat()">
+        <option value="all">all</option>
+        <option value="shooting">shooting</option>
+        <option value="sports">sports</option>
+        <option value="io">io</option>
+        <option value="action">action</option>
+        <option value="racing">racing</option>
+        <option value="puzzle">puzzle</option>
+        <option value="other">other</option>
+      </select>
+    </div>
+    <div class="games-back-row">
+      <button class="games-back-btn" onclick="closeGames()">← back</button>
+    </div>
+  </div>
+
+  <div class="games-body">
+    <div class="game-grid" id="game-grid">
+
+      <div class="game-card" data-cat="shooting" onclick="openGame('1v1.LoL (1).html')">
+        <div class="game-card-bg" style="background-image:url('1v1.lol.png');"></div>
+        <div class="game-card-title">1v1.lol</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="action" onclick="openGame('Slope.html')">
+        <div class="game-card-bg" style="background-image:url('slope.png');"></div>
+        <div class="game-card-title">slope</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="action" onclick="openGame('Run 3.html')">
+        <div class="game-card-bg" style="background-image:url('run3.png');"></div>
+        <div class="game-card-title">run 3</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="sports" onclick="openGame('Baseball Bros.html')">
+        <div class="game-card-bg" style="background-image:url('baseballbros.png');"></div>
+        <div class="game-card-title">baseball bros</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="action" onclick="openGame('Tag.html')">
+        <div class="game-card-bg" style="background-image:url('tag.png');"></div>
+        <div class="game-card-title">tag</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="sports" onclick="openGame('Football Bros.html')">
+        <div class="game-card-bg" style="background-image:url('footballbros.png');"></div>
+        <div class="game-card-title">football bros</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="action" onclick="openGame('10 Minutes Till Dawn.html')">
+        <div class="game-card-bg" style="background-image:url('10minutestilldawn.png');"></div>
+        <div class="game-card-title">10 minutes till dawn</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="sports" onclick="openGame('Basket Random.html')">
+        <div class="game-card-bg" style="background-image:url('basketrandom.png');"></div>
+        <div class="game-card-title">basket random</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="io" onclick="openGame('BiLife.html')">
+        <div class="game-card-bg" style="background-image:url('bitlife.png');"></div>
+        <div class="game-card-title">bitlife</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="action" onclick="openGame('Minecraft Pocket Edition.html')">
+        <div class="game-card-bg" style="background-image:url('minecraft.png');"></div>
+        <div class="game-card-title">minecraft</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="action" onclick="openGame('Draw Joust.html')">
+        <div class="game-card-bg" style="background-image:url('drawjoust.png');"></div>
+        <div class="game-card-title">draw joust</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="action" onclick="openGame('Google Baseball.html')">
+        <div class="game-card-bg" style="background-image:url('googlebaseball.png');"></div>
+        <div class="game-card-title">google baseball</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="action" onclick="openGame('Growden.io.html')">
+        <div class="game-card-bg" style="background-image:url('growden.png');"></div>
+        <div class="game-card-title">growden</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="action" onclick="openGame('Raft.html')">
+        <div class="game-card-bg" style="background-image:url('raft.png');"></div>
+        <div class="game-card-title">raft</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="racing" onclick="openGame('Escape Road 2.html')">
+        <div class="game-card-bg" style="background-image:url('escaperoad2.png');"></div>
+        <div class="game-card-title">escape road 2</div>
+        <span class="game-card-star">☆</span>
+      </div>
+      <div class="game-card" data-cat="sports" onclick="downloadRL2D()">
+        <div class="game-card-bg" style="background-image:url('rl2d.png');"></div>
+        <div class="game-card-title">rl 2d</div>
+        <span class="game-card-star">☆</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS SCREEN -->
+<div id="settings-screen">
+  <div style="position:absolute;inset:0;background:url('HalloweenHome.png') center/cover no-repeat;opacity:0;z-index:0;pointer-events:none;"></div>
+
+  <div class="settings-topbar">
+    <div class="settings-logo">MK</div>
+    <button class="settings-close" onclick="closeSettings()">✕</button>
+  </div>
+  <div class="settings-body">
+    <div class="page-title">Settings</div>
+    <div class="settings-list">
+      <div class="settings-row">
+        <span class="settings-row-label">Stars Background</span>
+        <div class="settings-toggle on" onclick="this.classList.toggle('on'); toggleStars()"></div>
+      </div>
+      <div class="settings-row">
+        <span class="settings-row-label">Site Version</span>
+        <span class="settings-row-value">1.1 / halloween</span>
+      </div>
+      <div class="settings-row">
+        <span class="settings-row-label">Creator</span>
+        <span class="settings-row-value">MK</span>
+      </div>
+      <div class="settings-row">
+        <span class="settings-row-label">Access</span>
+        <span class="settings-row-value">Free</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GAME PLAYER -->
+<div id="game-player">
+  <button id="close-game" onclick="closeGame()">← Back to Games</button>
+  <iframe id="game-frame" allow="fullscreen"></iframe>
+</div>
+
+<script>
+
+  /* ── VENT ── */
+  function openVent() {
+    const screen = document.getElementById('vent-screen');
+    screen.style.display = 'block';
+    startFlashlight();
+    const vid = document.getElementById('jumpscare-video');
+    vid.style.display = 'none';
+    vid.currentTime = 0;
+    setTimeout(() => {
+      vid.style.display = 'block';
+      vid.play();
+      vid.onended = () => { closeVent(); };
+    }, 3000);
+  }
+
+  function closeVent() {
+    document.getElementById('vent-screen').style.display = 'none';
+    stopFlashlight();
+    const vid = document.getElementById('jumpscare-video');
+    vid.pause();
+    vid.currentTime = 0;
+    vid.style.display = 'none';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeVent(); closeWitchScare(); }
+  });
+
+  let ventRAF = null;
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+
+  function startFlashlight() {
+    const canvas = document.getElementById('vent-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const screen = document.getElementById('vent-screen');
+    screen.addEventListener('mousemove', onVentMouseMove);
+
+    function draw() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const grad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 220);
+      grad.addColorStop(0,   'rgba(0,0,0,0)');
+      grad.addColorStop(0.45,'rgba(0,0,0,0.1)');
+      grad.addColorStop(0.75,'rgba(0,0,0,0.7)');
+      grad.addColorStop(1,   'rgba(0,0,0,1)');
+
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const tint = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 180);
+      tint.addColorStop(0,   'rgba(255,240,200,0.07)');
+      tint.addColorStop(0.5, 'rgba(255,220,150,0.03)');
+      tint.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.globalCompositeOperation = 'screen';
+      ctx.fillStyle = tint;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.globalCompositeOperation = 'source-over';
+      ventRAF = requestAnimationFrame(draw);
+    }
+
+    draw();
+  }
+
+  function onVentMouseMove(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  }
+
+  function stopFlashlight() {
+    if (ventRAF) { cancelAnimationFrame(ventRAF); ventRAF = null; }
+    const screen = document.getElementById('vent-screen');
+    screen.removeEventListener('mousemove', onVentMouseMove);
+  }
+
+  /* ── WITCH JUMPSCARE ── */
+  function openWitchScare() {
+    const screen = document.getElementById('witch-scare-screen');
+    const vid = document.getElementById('witch-scare-video');
+    screen.style.display = 'block';
+    vid.currentTime = 0;
+    vid.play();
+    vid.onended = () => { closeWitchScare(); };
+  }
+
+  function closeWitchScare() {
+    const screen = document.getElementById('witch-scare-screen');
+    const vid = document.getElementById('witch-scare-video');
+    vid.pause();
+    vid.currentTime = 0;
+    screen.style.display = 'none';
+  }
+
+  /* ── RL 2D DOWNLOAD ── */
+  function downloadRL2D() {
+    const a = document.createElement('a');
+    a.href = 'RL2D.zip';
+    a.download = 'RL2D.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  /* ── STARS ── */
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  let starsOn = true;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 220; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.0 + 0.1,
+        o: Math.random() * 0.5 + 0.1,
+        speed: Math.random() * 0.12 + 0.02
+      });
+    }
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (starsOn) {
+      stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,220,200,${s.o})`;
+        ctx.fill();
+        s.y -= s.speed;
+        if (s.y < 0) { s.y = canvas.height; s.x = Math.random() * canvas.width; }
+      });
+    }
+    requestAnimationFrame(drawStars);
+  }
+
+  function toggleStars() { starsOn = !starsOn; }
+
+  resize(); initStars(); drawStars();
+  window.addEventListener('resize', () => { resize(); initStars(); });
+
+  /* ── UPDATE LOG ── */
+  function showUpdateLog() {
+    document.getElementById('update-log').classList.add('show');
+  }
+
+  function closeUpdateLog() {
+    document.getElementById('update-log').classList.remove('show');
+  }
+
+  /* ── PASSWORD ── */
+  const PASSWORD = "Free";
+
+  function checkPassword() {
+    const input = document.getElementById('password-input').value;
+    if (input === PASSWORD) {
+      const screen = document.getElementById('password-screen');
+      screen.style.opacity = "0";
+      screen.style.transition = "opacity 0.5s";
+      setTimeout(() => {
+        screen.style.display = "none";
+        document.getElementById('bg-image').classList.add('show');
+        showUpdateLog();
+      }, 500);
+    } else {
+      document.getElementById('error-msg').textContent = "Invalid — try again";
+      document.getElementById('password-input').value = '';
+    }
+  }
+
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") checkPassword();
+  });
+
+  /* ── SCREENS ── */
+  function openGames() { document.getElementById('games-screen').classList.add('open'); }
+  function closeGames() { document.getElementById('games-screen').classList.remove('open'); }
+  function openSettings() { document.getElementById('settings-screen').classList.add('open'); }
+  function closeSettings() { document.getElementById('settings-screen').classList.remove('open'); }
+
+  /* ── GAME PLAYER ── */
+  function openGame(url) {
+    document.getElementById("game-player").style.display = "flex";
+    document.getElementById("game-frame").src = url;
+  }
+
+  function closeGame() {
+    document.getElementById("game-player").style.display = "none";
+    document.getElementById("game-frame").src = "";
+  }
+
+  /* ── FILTER ── */
+  let currentCat = 'all';
+
+  function filterByCat() {
+    currentCat = document.getElementById('cat-select').value;
+    filterGames();
+  }
+
+  function filterGames() {
+    const search = document.getElementById('game-search').value.toLowerCase();
+    document.querySelectorAll('.game-card').forEach(card => {
+      const title = card.querySelector('.game-card-title').textContent.toLowerCase();
+      const cat = card.getAttribute('data-cat');
+      const matchesCat = currentCat === 'all' || cat === currentCat;
+      const matchesSearch = title.includes(search);
+      card.style.display = (matchesCat && matchesSearch) ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
